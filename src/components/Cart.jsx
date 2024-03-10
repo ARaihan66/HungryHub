@@ -5,7 +5,7 @@ import ItemCart from "./ItemCart";
 import { useSelector } from "react-redux";
 
 const Cart = () => {
-  const [activeCart, setActiveCart] = useState(true);
+  const [activeCart, setActiveCart] = useState(false);
 
   const cartItems = useSelector((state) => state.cart.cart);
   return (
@@ -16,7 +16,7 @@ const Cart = () => {
         }`}
       >*/}
       {activeCart && (
-        <div className="fixed right-0 top-0 w-full md:w-[20vw] h-full p-4 bg-white z-50">
+        <div className="fixed right-0 top-0 w-full md:w-[20vw] h-full p-4 bg-white z-50 overflow-y-scroll">
           <div className="flex justify-between my-3 mx-2">
             <span className="text-xl font-bold">My Order</span>
             <AiOutlineClose
@@ -24,9 +24,21 @@ const Cart = () => {
               className="border-2 border-gray-600 text-gray-600 font-bold p-2 text-xl rounded-md hover:text-red-300 hover:border-red-300 cursor-pointer"
             />
           </div>
-          <ItemCart />
-          <ItemCart />
-          <ItemCart />
+
+          {cartItems.map((food) => {
+            const { id, img, name, price, qty } = food;
+            return (
+              <ItemCart
+                key={id}
+                id={id}
+                img={img}
+                name={name}
+                price={price}
+                qty={qty}
+              />
+            );
+          })}
+
           <div className="absolute bottom-0 mb-12">
             <h3 className="text-semibold text-gray-800">Items:</h3>
             <h3 className="font-semibold text-gray-800">Total Amount:</h3>

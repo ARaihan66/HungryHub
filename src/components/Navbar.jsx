@@ -8,10 +8,8 @@ const Navbar = () => {
           {new Date().toUTCString().slice(0, 16)}
         </h3>
         <h1 className="text-2xl font-bold py-2">
-          <span className="text-blue-900">Hungry</span>
-          <span className="text-amber-600 bg-lime-500	 py-1 px-2 rounded-xl">
-            Hub
-          </span>
+          <span className="text-blue-900 bg-white py-1 px-2">Hungry</span>
+          <span className="bg-blue-900 text-white	 py-1 px-2 ">Hub</span>
         </h1>
       </div>
       <div>
