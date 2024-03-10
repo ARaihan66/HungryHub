@@ -25,19 +25,23 @@ const Cart = () => {
             />
           </div>
 
-          {cartItems.map((food) => {
-            const { id, img, name, price, qty } = food;
-            return (
-              <ItemCart
-                key={id}
-                id={id}
-                img={img}
-                name={name}
-                price={price}
-                qty={qty}
-              />
-            );
-          })}
+          {cartItems.length > 0 ? (
+            cartItems.map((food) => {
+              const { id, img, name, price, qty } = food;
+              return (
+                <ItemCart
+                  key={id}
+                  id={id}
+                  img={img}
+                  name={name}
+                  price={price}
+                  qty={qty}
+                />
+              );
+            })
+          ) : (
+            <h4 className="text-center">Your Cart is Empty</h4>
+          )}
 
           <div className="absolute bottom-0 mb-12">
             <h3 className="text-semibold text-gray-800">Items:</h3>
