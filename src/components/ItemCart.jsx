@@ -6,14 +6,17 @@ import { MdDelete } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { removeFromCart } from "../redux/slices/CartSlice";
 
-const ItemCart = ({id, img, name, price, qty }) => {
-    const dispatch = useDispatch();
+const ItemCart = ({ id, img, name, price, qty }) => {
+  const dispatch = useDispatch();
 
   return (
-    <div className="flex items-center gap-2 shadow-lg rounded-lg p-3">
-      <MdDelete onClick={()=>{
-        dispatch(removeFromCart({id}))
-      }} className="absolute right-7 text-gray-600" />
+    <div className="flex items-center justify-center gap-2 shadow-lg rounded-lg p-3">
+      <MdDelete
+        onClick={() => {
+          dispatch(removeFromCart({ id }));
+        }}
+        className="absolute right-7 text-gray-600 cursor-pointer"
+      />
       <img src={img} className="w-[50px] h-[50px]" />
       <div className="leading-5">
         <h5>{name}</h5>
