@@ -4,7 +4,11 @@ import { FaMinus } from "react-icons/fa6";
 import { FaDollarSign } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { useDispatch } from "react-redux";
-import { removeFromCart } from "../redux/slices/CartSlice";
+import {
+  removeFromCart,
+  incrementQty,
+  decrementQty,
+} from "../redux/slices/CartSlice";
 
 const ItemCart = ({ id, img, name, price, qty }) => {
   const dispatch = useDispatch();
@@ -25,9 +29,19 @@ const ItemCart = ({ id, img, name, price, qty }) => {
             <FaDollarSign /> {price}
           </span>
           <div className="flex items-center gap-2 absolute right-7">
-            <BsPlusLg className="font-bold border-2 border-gray-800 text-gray-800 cursor-pointer hover:text-white hover:bg-green-500 rounded-md transition-all ease-linear" />
+            <BsPlusLg
+              onClick={() => {
+                dispatch(incrementQty({ id }));
+              }}
+              className="font-bold border-2 border-gray-800 text-gray-800 cursor-pointer hover:text-white hover:bg-green-500 rounded-md transition-all ease-linear"
+            />
             <span className="">{qty}</span>
-            <FaMinus className="text-xl border-2 border-gray-800 text-gray-800 cursor-pointer hover:text-white hover:bg-green-500 rounded-md transition-all ease-linear" />
+            <FaMinus
+              onClick={() => {
+                dispatch(decrementQty({ id }));
+              }}
+              className="text-xl border-2 border-gray-800 text-gray-800 cursor-pointer hover:text-white hover:bg-green-500 rounded-md transition-all ease-linear"
+            />
           </div>
         </div>
       </div>
