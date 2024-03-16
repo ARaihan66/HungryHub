@@ -36,11 +36,24 @@ export const CartSlice = createSlice({
         item.id === action.payload.id ? { ...item, qty: item.qty - 1 } : item
       );
     },
+
+    totalPrice: (state, action) => {
+      state.cart = state.cart.map((item) =>
+        item.id === action.payload.id
+          ? { ...item, price: item.price * item.qty }
+          : item
+      );
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addToCart, removeFromCart, incrementQty, decrementQty } =
-  CartSlice.actions;
+export const {
+  addToCart,
+  removeFromCart,
+  incrementQty,
+  decrementQty,
+  totalPrice,
+} = CartSlice.actions;
 
 export default CartSlice.reducer;

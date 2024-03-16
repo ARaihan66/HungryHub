@@ -8,6 +8,7 @@ import {
   removeFromCart,
   incrementQty,
   decrementQty,
+  totalPrice,
 } from "../redux/slices/CartSlice";
 
 const ItemCart = ({ id, img, name, price, qty }) => {
@@ -32,13 +33,19 @@ const ItemCart = ({ id, img, name, price, qty }) => {
             <BsPlusLg
               onClick={() => {
                 dispatch(incrementQty({ id }));
+                //dispatch(totalPrice({ id }));
               }}
               className="font-bold border-2 border-gray-800 text-gray-800 cursor-pointer hover:text-white hover:bg-green-500 rounded-md transition-all ease-linear"
             />
             <span className="">{qty}</span>
             <FaMinus
               onClick={() => {
-                dispatch(decrementQty({ id }));
+                if(qty > 1){
+                  dispatch(decrementQty({ id }));
+                }else{
+                  qty = 1
+                }
+                //dispatch(totalPrice({ id }));
               }}
               className="text-xl border-2 border-gray-800 text-gray-800 cursor-pointer hover:text-white hover:bg-green-500 rounded-md transition-all ease-linear"
             />

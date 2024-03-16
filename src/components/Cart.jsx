@@ -8,6 +8,13 @@ const Cart = () => {
   const [activeCart, setActiveCart] = useState(false);
 
   const cartItems = useSelector((state) => state.cart.cart);
+  const totalQty = cartItems.reduce((totalQty, item) => {
+    return totalQty + item.qty;
+  }, 0);
+  const totalPrice = cartItems.reduce((totalPrice, item) => {
+    return totalPrice + item.qty * item.price;
+  }, 0);
+
   return (
     <>
       {/*<div
@@ -44,8 +51,10 @@ const Cart = () => {
           )}
 
           <div className="absolute bottom-0 mb-12">
-            <h3 className="text-semibold text-gray-800">Items:</h3>
-            <h3 className="font-semibold text-gray-800">Total Amount:</h3>
+            <h3 className="text-semibold text-gray-800">Items:{totalQty}</h3>
+            <h3 className="font-semibold text-gray-800">
+              Total Amount:{totalPrice}
+            </h3>
             <hr />
             <button className="font-bold text-white bg-green-500 py-2 px-3 rounded-lg w-[90vw] md:w-[20vw]">
               Checkout
@@ -56,7 +65,9 @@ const Cart = () => {
 
       <TiShoppingCart
         onClick={() => setActiveCart(!activeCart)}
-        className="text-3xl fixed rounded-full bottom-10 right-1 p-2 bg-orange-400 cursor-pointer"
+        className={`text-3xl fixed rounded-full bottom-10 right-1 p-2 bg-orange-400 cursor-pointer ${
+          totalQty > 0 && "animate-bounce delay-500 translate-all duration-500"
+        }`}
       />
     </>
   );
