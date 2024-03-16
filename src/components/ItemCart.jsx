@@ -8,7 +8,6 @@ import {
   removeFromCart,
   incrementQty,
   decrementQty,
-  totalPrice,
 } from "../redux/slices/CartSlice";
 
 const ItemCart = ({ id, img, name, price, qty }) => {

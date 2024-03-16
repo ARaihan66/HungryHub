@@ -4,6 +4,7 @@ import { TiShoppingCart } from "react-icons/ti";
 import ItemCart from "./ItemCart";
 import { useSelector } from "react-redux";
 
+
 const Cart = () => {
   const [activeCart, setActiveCart] = useState(false);
 
@@ -15,13 +16,10 @@ const Cart = () => {
     return totalPrice + item.qty * item.price;
   }, 0);
 
+  
+
   return (
     <>
-      {/*<div
-        className={`fixed right-0 top-0 w-full md:w-[20vw] h-full p-4 bg-white ${
-          activeCart ? "translate-x-0" : "translate-x-full"
-        }`}
-      >*/}
       {activeCart && (
         <div className="fixed right-0 top-0 w-full md:w-[20vw] h-full p-4 bg-white z-50 overflow-y-scroll">
           <div className="flex justify-between my-3 mx-2">
@@ -56,6 +54,7 @@ const Cart = () => {
               Total Amount:{totalPrice}
             </h3>
             <hr />
+
             <button className="font-bold text-white bg-green-500 py-2 px-3 rounded-lg w-[90vw] md:w-[20vw]">
               Checkout
             </button>
