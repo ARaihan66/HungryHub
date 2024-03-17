@@ -3,11 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 export const SearchSlice = createSlice({
   name: "counter",
   initialState: {
-    search: " ",
+    search: "",
   },
   reducers: {
     setSearch: (state, action) => {
-      state.saerch = action.payload;
+      state.search = action.payload;
     },
   },
 });

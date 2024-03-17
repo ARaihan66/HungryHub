@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 
 const FoodItem = () => {
   const category = useSelector((state) => state.category.category);
+  const search = useSelector((state) => state.search.search);
 
   const handleToast = (name) => toast.success(`Added ${name} to the cart`);
 
@@ -15,7 +16,9 @@ const FoodItem = () => {
       <div className="flex flex-wrap justify-center gap-12 my-7">
         {FoodData.filter((food) => {
           if (category === "All") {
-            return true;
+            return food.name
+              .toLocaleLowerCase()
+              .includes(search.toLocaleLowerCase());
           } else {
             return category === food.category;
           }
