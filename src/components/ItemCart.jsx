@@ -4,6 +4,7 @@ import { FaMinus } from "react-icons/fa6";
 import { FaDollarSign } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { useDispatch } from "react-redux";
+import toast, { Toaster } from "react-hot-toast";
 import {
   removeFromCart,
   incrementQty,
@@ -18,6 +19,7 @@ const ItemCart = ({ id, img, name, price, qty }) => {
       <MdDelete
         onClick={() => {
           dispatch(removeFromCart({ id }));
+          toast.success(`${name} Removed!`);
         }}
         className="absolute right-7 text-gray-600 cursor-pointer"
       />
@@ -39,10 +41,10 @@ const ItemCart = ({ id, img, name, price, qty }) => {
             <span className="">{qty}</span>
             <FaMinus
               onClick={() => {
-                if(qty > 1){
+                if (qty > 1) {
                   dispatch(decrementQty({ id }));
-                }else{
-                  qty = 1
+                } else {
+                  qty = 1;
                 }
                 //dispatch(totalPrice({ id }));
               }}
