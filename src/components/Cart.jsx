@@ -3,7 +3,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { TiShoppingCart } from "react-icons/ti";
 import ItemCart from "./ItemCart";
 import { useSelector } from "react-redux";
-
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const [activeCart, setActiveCart] = useState(false);
@@ -16,7 +16,7 @@ const Cart = () => {
     return totalPrice + item.qty * item.price;
   }, 0);
 
-  
+  const navigate = useNavigate();
 
   return (
     <>
@@ -55,7 +55,10 @@ const Cart = () => {
             </h3>
             <hr />
 
-            <button className="font-bold text-white bg-green-500 py-2 px-3 rounded-lg w-[90vw] md:w-[20vw]">
+            <button
+              onClick={() => navigate("/success")}
+              className="font-bold cursor-pointer text-white bg-green-500 py-2 px-3 rounded-lg w-[90vw] md:w-[20vw]"
+            >
               Checkout
             </button>
           </div>
