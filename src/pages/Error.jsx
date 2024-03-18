@@ -1,11 +1,12 @@
-import React from 'react'
+import React from "react";
 
 const Error = () => {
   return (
-    <h1 className="text-xl font-bold underline">
-     404 Error
-    </h1>
-  )
-}
+    <div className=" flex flex-col justify-center items-center h-screen">
+      <h1 className="text-3xl font-bold text-purple-950	">Opps</h1>
+      <p className="text-l font-semibold">404 ERROR</p>
+    </div>
+  );
+};
 
-export default Error
+export default Error;
