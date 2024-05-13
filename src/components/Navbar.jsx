@@ -1,9 +1,11 @@
-import React from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setSearch } from "../redux/slices/SearchSlice";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const dispatch = useDispatch();
+  const [isAuth, setIsAuth] = useState(false);
   return (
     <nav className="flex flex-col justify-between py-3 mx-6 mb-10 lg:flex-row">
       <div>
@@ -28,6 +30,29 @@ const Navbar = () => {
           className="p-3 border border-gray-500 outline-none rounded-lg w-full lg:w-[25vw]"
         />
       </div>
+
+      {isAuth ? (
+        <div>
+          <button className="bg-blue-500 p-3 rounded-md font-bold cursor-pointer no-underline	 text-white md:mx-2 hover:bg-gray-400 my-3 md:my-0">
+            Log Out
+          </button>
+        </div>
+      ) : (
+        <div>
+          <Link
+            to="/sign-in"
+            className="bg-blue-500 p-3 rounded-md font-bold cursor-pointer no-underline	 text-white mx-2 hover:bg-gray-400m my-3 md:my-0"
+          >
+            Sign In
+          </Link>
+          <Link
+            to="/sign-up"
+            className="bg-blue-500 p-3 rounded-md font-bold cursor-pointer no-underline	 text-white mx-2 hover:bg-gray-400 my-3 md:my-0"
+          >
+            Sign Up
+          </Link>
+        </div>
+      )}
     </nav>
   );
 };
