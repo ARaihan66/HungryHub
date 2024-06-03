@@ -1,11 +1,39 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
 import { setSearch } from "../redux/slices/SearchSlice";
 import { Link } from "react-router-dom";
+import { loginUser, setUser } from "../redux/slices/AuthSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const [isAuth, setIsAuth] = useState(false);
+
+  const auth = useSelector((state)=> state.auth.isAuth);
+  const user = useSelector((state)=> state.auth.user);
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const res = await fetch("http://localhost:7000/api/user/get", {
+          method: "GET",
+          credentials: "include"
+        });
+
+        //if (!res.ok) {
+        //  throw new Error(`HTTP error! status: ${res.status}`);
+        //}
+
+        const data = await res.json();
+        console.log(data);
+      } catch (error) {
+        console.error("Failed to fetch user data:", error);
+      }
+    };
+
+    getUser();
+  }, []); 
+
+
   return (
     <nav className="flex flex-col justify-between py-3 mx-6 mb-10 lg:flex-row">
       <div>

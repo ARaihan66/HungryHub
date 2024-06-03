@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +11,44 @@ const Signup = () => {
 
   const { userName, email, password } = formData;
 
+  const navigate = useNavigate();
+
+  const handleOnChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((preState) => ({
+      ...preState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await fetch("http://localhost:7000/api/user/sign-up", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        console.log("Network response was not ok!");
+        return;
+      }
+
+      const data = await response.json();
+      const { success } = data;
+
+      if (success) {
+        navigate("/sign-in");
+      }
+      
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <section className="h-screen bg-gradient-to-r from-indigo-500 to-purple-500 overflow-hidden p-5">
       <div className="container h-full px-6 py-16 mx-auto flex items-center justify-center overflow-y-hidden">
@@ -18,15 +57,19 @@ const Signup = () => {
             <h2 className="text-2xl font-bold text-white text-center mb-4">
               SIGN UP
             </h2>
-            <form className="flex justify-center items-center flex-col w-full">
+            <form
+              onSubmit={handleSubmit}
+              className="flex justify-center items-center flex-col w-full "
+            >
               <div className="mb-4">
                 <input
                   type="text"
                   name="userName"
                   value={userName}
                   id="typeEmailX"
+                  onChange={handleOnChange}
                   className="form-control block w-[300px] px-4 py-5 text-gray-900 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                  placeholder="Username"
+                  placeholder="Mr. John Deo"
                 />
               </div>
               <div className="mb-4">
@@ -35,8 +78,9 @@ const Signup = () => {
                   name="email"
                   value={email}
                   id="typeEmailX"
+                  onChange={handleOnChange}
                   className="form-control block w-[300px] px-4 py-5 text-gray-900 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                  placeholder="Email"
+                  placeholder="johndeo@gmail.com"
                 />
               </div>
               <div className="mb-6">
@@ -45,15 +89,16 @@ const Signup = () => {
                   name="password"
                   value={password}
                   id="typePasswordX"
+                  onChange={handleOnChange}
                   className="form-control block w-[300px] px-4 py-5 text-gray-900 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                  placeholder="Password"
+                  placeholder="********"
                 />
               </div>
               <button
                 type="submit"
-                className="form-control block  px-14 py-5 text-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring bg-light-blue-900 font-bold cursor-pointer"
+                className="form-control block px-14 py-5 text-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring bg-light-blue-900 font-bold cursor-pointer"
               >
-                Login
+                Sign Up
               </button>
             </form>
             <p className="text-sm text-center text-gray-400 mt-6">

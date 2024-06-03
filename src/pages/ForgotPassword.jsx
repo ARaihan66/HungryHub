@@ -8,7 +8,7 @@ const ForgotPassword = () => {
         <form>
           <input
             type="email"
-            placeholder="Enter email"
+            placeholder="johndeo@gmail.com"
             className="outline-none border-none px-10 py-5 w-[300px] rounded-md text-black"
           />
         </form>

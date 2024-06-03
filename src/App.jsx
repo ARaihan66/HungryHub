@@ -6,6 +6,7 @@ import Error from './pages/Error'
 import  Login  from './pages/Login'
 import  SignUp  from './pages/SingUp'
 import ForgotPassword from './pages/ForgotPassword'
+import ResetPassword from './pages/ResetPassword'
 
 const App = () => {
   return (
@@ -16,7 +17,8 @@ const App = () => {
       <Route path='*' element={<Error/>}/>
       <Route path='/sign-in' element={<Login/>}/>
       <Route path="/sign-up" element={<SignUp/>}/>
-      <Route path="/forgot-password"element={<ForgotPassword/>}/>
+      <Route path="/forgot-password" element={<ForgotPassword/>}/>
+      <Route path="/reset-password" element={<ResetPassword/>}/>
     </Routes>
     </BrowserRouter>
   )
